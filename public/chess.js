@@ -1,5 +1,3 @@
-/* Set Count */
-
 $(document).ready(function() {
   var position = $("#chess_board").position();
 
@@ -11,10 +9,10 @@ $(document).ready(function() {
 	}
 	
 	/* Make pieces draggable */
-	$('#chess_board a').live('mousedown', function() {
+	$('#chess_board span').live('mousedown', function() {
 		
 		var object = $(this);
-		var class_array = $(this).attr('class').split(' ');
+		//var class_array = $(this).attr('class').split(' ');
 		
 		//element(object,class_array);
 		
@@ -28,9 +26,19 @@ $(document).ready(function() {
 	
 		var piece = $(item).attr('class').split(' ');
 		var start_cell = $(item).parent().attr('id').split('');
-		
-		//init_game(piece, start_cell);
-	
 	});
+
+  function placeQueens() {
+    var queen_positions = $("#chess_board").data('queens-positions');
+    console.log(queen_positions);
+    var queen_string = "<span>&#9819;</span>";
+    $.each(queen_positions, function(index, value) {
+      console.log(index + ': ' + value);
+      $($($('#chess_board tr')[index]).find('td')[value]).html(queen_string);
+    });
+  }
+
+  placeQueens();
+
 });
 
