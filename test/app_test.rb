@@ -14,7 +14,7 @@ class MyAppTest < Test::Unit::TestCase
 
   def test_root
     get '/'
-    assert_match 'Welcome', last_response.body
+    assert_match 'N-Queens', last_response.body
   end
 
   private
