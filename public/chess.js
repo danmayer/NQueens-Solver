@@ -28,17 +28,30 @@ $(document).ready(function() {
 		var start_cell = $(item).parent().attr('id').split('');
 	});
 
-  function placeQueens() {
-    var queen_positions = $("#chess_board").data('queens-positions');
+  function placeQueens(queen_positions) {
     console.log(queen_positions);
-    var queen_string = "<span>&#9819;</span>";
+    var queen_string = "<span class='queen_piece'>&#9819;</span>";
+    $('.queen_piece').remove();
     $.each(queen_positions, function(index, value) {
       console.log(index + ': ' + value);
       $($($('#chess_board tr')[index]).find('td')[value]).html(queen_string);
     });
   }
 
-  placeQueens();
+  placeQueens($("#chess_board").data('queens-positions'));
+
+  $('#promblem_solver').submit(function() {
+    $.ajax({
+      type: "POST",
+      url: $('#promblem_solver').attr('action'),
+      data: $("#promblem_solver").serialize(),
+      success: function(data) {
+	var results_data = JSON.parse(data);
+	placeQueens(results_data['results']);
+      }
+    });
+    return false;
+  });
 
 });
 

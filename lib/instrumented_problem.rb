@@ -1,5 +1,7 @@
 class InstrumentedProblem < Problem
-  #    """Delegates to a problem, and keeps statistics."""
+  # Delegates to a problem, and keeps statistics.
+
+  attr_accessor :initial
 
   def initialize(problem) 
     @problem = problem

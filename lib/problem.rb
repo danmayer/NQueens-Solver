@@ -42,9 +42,7 @@ class Problem
   def value()
     #        """For optimization problems, each state has a value.  Hill-climbing
     #        and related algorithms try to maximize this value."""
-
-    #TODO how do you force code to be abstract in ruby
-    #abstract
+    raise "child class must implement value"
   end
 
 end

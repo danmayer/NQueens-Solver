@@ -1,6 +1,14 @@
-  <h3>Solved 8*8 N-Queens Board</h3>
+  <h3>Random 8*8 N-Queens Board</h3>
 
-  <table id="chess_board" cellpadding="0" cellspacing="0" data-queens-positions="<%=  @inst_prob.found.to_json %>">
+  <p>
+    <form id="promblem_solver" class="solve_forms" action="/solve" method="post">
+      <input type="hidden" name="search_type" value="solve" />
+      <input type="hidden" name="positions" value="<%=  @prob.initial.to_json %>" />
+      <input type="submit" name="submit" value="solve" class="button" />
+    </form>
+  </p>
+
+  <table id="chess_board" cellpadding="0" cellspacing="0" data-queens-positions="<%=  @prob.initial.to_json %>">
     <tr>
       <td id="A8"> </td>
       <td id="B8"> </td>

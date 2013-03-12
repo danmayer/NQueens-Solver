@@ -7,9 +7,15 @@ class NQueensProblem < Problem
   
   attr_accessor :n_queens, :initial
   
-  def initialize(n_queens)
+  def initialize(n_queens, initial_state = nil)
     @n_queens = n_queens
-    @initial = Array.new(n_queens)
+    @initial = initial_state.nil? ? Array.new(n_queens) : initial_state
+  end
+
+  def random_state
+    (0...@n_queens).to_a.each do |row|
+      @initial[row] = rand(@n_queens)
+    end
   end
 
   def successor(state) 
@@ -25,9 +31,7 @@ class NQueensProblem < Problem
       col = state.index(nil)
       attempts = []
       if col!=nil
-        #TODO possible N-1 error
         (0...@n_queens).to_a.each do |row|
-          #bpoint
           attempts << [row, place(col, row, state)] if !conflicted(state, row, col)
         end
       end
@@ -37,7 +41,6 @@ class NQueensProblem < Problem
                     
   def conflicted(state, row, col)
     #"Would placing a queen at (row, col) conflict with anything?"
-    #TODO possible n-1 one error
     if col!=nil
       (0...col).to_a.each do |c|
         #bpoint
@@ -56,7 +59,6 @@ class NQueensProblem < Problem
   def goal_test(state)
     #"Check if all columns filled, no conflicts."
     return false if state[(state.length-1)] == nil 
-    #TODO possible n-1 error
     (0...state.length).to_a.each do |c|
       return false if conflicted(state, state[c], c)               
     end
