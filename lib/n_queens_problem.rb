@@ -50,9 +50,9 @@ class NQueensProblem < Problem
     return false
   end
           
+  #"Would putting two queens in (row1, col1) and (row2, col2) conflict?"
+  ## same row  ## same column ## same \ diagonal ## same / diagonal
   def conflict(row1, col1, row2, col2)
-    #"Would putting two queens in (row1, col1) and (row2, col2) conflict?"
-    ## same row  ## same column ## same \ diagonal ## same / diagonal
     return (row1 == row2 || col1 == col2 || row1-col1 == row2-col2 || row1+col1 == row2+col2) 
   end
     
