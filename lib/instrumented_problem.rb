@@ -49,6 +49,10 @@ class InstrumentedProblem < Problem
     return @found
   end
 
+  def to_hash
+    {:found => @found, :successors => @succs, :goal_tests => @goal_testsm, :states => @states}
+  end
+
   def to_s
     return "successors | goal tests | states | found \n"+'<%4d/%4d/%4d/%s>' % [@succs, @goal_tests, @states, ' true'] if @found!=nil
     return "successors | goal tests | states | found \n"+'<%4d/%4d/%4d/%s>' % [@succs, @goal_tests, @states, ' false'] if @found==nil

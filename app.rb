@@ -27,8 +27,15 @@ end
 post '/solve' do
   @prob = NQueensProblem.new(BOARD_SIZE)
   @inst_prob = InstrumentedProblem.new(@prob)
+
+  #  breadth_first_tree_search(inst_prob)
+  #depth_first_tree_search(inst_prob)
+  #breadth_first_graph_search(inst_prob)
+  #depth_first_graph_search(inst_prob)
+
+
   iterative_deepening_search(@inst_prob)
-  {:results => @inst_prob.found}.to_json
+  @inst_prob.to_hash.to_json
 end
 
 private

@@ -47,7 +47,10 @@ $(document).ready(function() {
       data: $("#promblem_solver").serialize(),
       success: function(data) {
 	var results_data = JSON.parse(data);
-	placeQueens(results_data['results']);
+	placeQueens(results_data['found']);
+	//{:found => @inst_prob.found, :successors => @succs, :goal_tests => @goal_testsm, :states => @states}
+	$('#results').html("<table><tr><td>successors</td><td>goal tests</td><td>states</td><td>found</td></tr><tr><td>"+ results_data['successors'] +"</td><td>"+ results_data['goal_tests'] +"</td><td>"+ results_data['states'] +"</td><td>" + "true" + "</td></tr></table>");
+	$('#results').show();
       }
     });
     return false;
