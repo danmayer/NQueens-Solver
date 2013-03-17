@@ -1,8 +1,7 @@
+# Delegates to a problem, and keeps statistics.
 class InstrumentedProblem < Problem
-  # Delegates to a problem, and keeps statistics.
-
   attr_accessor :initial
-
+  
   def initialize(problem) 
     @problem = problem
     @initial = problem.initial #shouldn't have to do this if method override correct
@@ -10,16 +9,16 @@ class InstrumentedProblem < Problem
     @found = nil
   end
         
+  #        Return a list of (action, state) pairs reachable from this state.
   def successor(state)
-    #        "Return a list of (action, state) pairs reachable from this state."
     result =  @problem.successor(state)
     @succs += 1
     @states += result.length
     return result
   end
     
+  #        Return true if the state is a goal.
   def goal_test(state)
-    #        "Return true if the state is a goal."
     @goal_tests += 1
     result = @problem.goal_test(state)
     @found = state if result 

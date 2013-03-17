@@ -1,8 +1,8 @@
+#    Search through the successors of a problem to find a goal.
+#    The argument fringe should be an empty queue.
+#    Don't worry about repeated paths to a state. [Fig. 3.8]
+#    Since we dont worry about repeated paths this can lead to infinite loops
 def tree_search(problem, fringe)
-  #    """Search through the successors of a problem to find a goal.
-  #    The argument fringe should be an empty queue.
-  #    Don't worry about repeated paths to a state. [Fig. 3.8]"""
-  #    Since we dont worry about repeated paths this can lead to infinite loops
   fringe.append(Node.new(problem.initial))
   while fringe.len > 0
     node = fringe.pop()
@@ -12,20 +12,20 @@ def tree_search(problem, fringe)
   return nil
 end
 
+#    Search the shallowest nodes in the search tree first. [p 74]
 def breadth_first_tree_search(problem)
-  #    "Search the shallowest nodes in the search tree first. [p 74]"
   return tree_search(problem, FIFOQueue.new)
 end
-    
+
+#    Search the deepest nodes in the search tree first. [p 74]  
 def depth_first_tree_search(problem)
-  #    "Search the deepest nodes in the search tree first. [p 74]"
   return tree_search(problem, Stack.new)
 end
 
+#    Search through the successors of a problem to find a goal.
+#    The argument fringe should be an empty queue.
+#    If two paths reach a state, only use the best one. [Fig. 3.18]
 def graph_search(problem, fringe)
-  #    """Search through the successors of a problem to find a goal.
-  #    The argument fringe should be an empty queue.
-  #    If two paths reach a state, only use the best one. [Fig. 3.18]"""
   closed = []
   fringe.append(Node.new(problem.initial))
   while fringe.len > 0
@@ -43,13 +43,13 @@ def graph_search(problem, fringe)
   return nil
 end
 
+#    Search the shallowest nodes in the search tree first. [p 74]
 def breadth_first_graph_search(problem)
-  #"Search the shallowest nodes in the search tree first. [p 74]"
   return graph_search(problem, FIFOQueue.new)
 end
     
+#    Search the shallowest nodes in the search tree first. [p 74]
 def depth_first_graph_search(problem)
-  #    "Search the deepest nodes in the search tree first. [p 74]"
   return graph_search(problem, Stack.new)
 end
   
@@ -80,12 +80,11 @@ def recursive_dls(node, problem, limit)
 end
 
 def depth_limited_search(problem, limit=50)
-  # Body of depth_limited_search:
   return recursive_dls(Node.new(problem.initial), problem, limit)
 end
 
+#    [Fig. 3.13]
 def iterative_deepening_search(problem)
-  #    "[Fig. 3.13]"
   [0..656].each do |depth| # for depth in xrange(sys.maxint)
     result = depth_limited_search(problem, depth)
     if result!='cutoff'
