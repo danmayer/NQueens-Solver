@@ -50,7 +50,7 @@ class InstrumentedProblem < Problem
   end
 
   def to_hash
-    {:found => @found, :successors => @succs, :goal_tests => @goal_testsm, :states => @states}
+    {:found => @found, :successors => @succs, :goal_tests => @goal_tests, :states => @states}
   end
 
   def to_s

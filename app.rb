@@ -1,5 +1,4 @@
 require 'json'
-require 'fileutils'
 require './lib/utils'
 require './lib/node'
 require './lib/problem'
@@ -17,17 +16,29 @@ BOARD_SIZE = 8
 helpers do
 end
 
-#before { protected! if request.path_info == "/" && request.request_method == "GET" && ENV['RACK_ENV']!='test' }
-
 get '/' do
   @prob = NQueensProblem.new(BOARD_SIZE)
   @prob.random_state
+  @available_searches = %w(breadth_first_tree_search depth_first_tree_search breadth_first_graph_search iterative_deepening_search)  
   erb :index
 end
 
 post '/solve' do
   @prob = NQueensProblem.new(BOARD_SIZE)
   @inst_prob = InstrumentedProblem.new(@prob)
+  
+  case params['search_type']
+  when 'breadth_first_tree_search'
+    breadth_first_tree_search(@inst_prob)
+  when 'depth_first_tree_search'
+    depth_first_tree_search(@inst_prob)
+  when 'breadth_first_graph_search'
+    breadth_first_graph_search(@inst_prob)
+  when 'iterative_deepening_search'
+    iterative_deepening_search(@inst_prob)
+  else
+    iterative_deepening_search(@inst_prob)
+  end
 
   #  breadth_first_tree_search(inst_prob)
   #depth_first_tree_search(inst_prob)

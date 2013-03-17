@@ -40,16 +40,16 @@ $(document).ready(function() {
 
   placeQueens($("#chess_board").data('queens-positions'));
 
-  $('#promblem_solver').submit(function() {
+  $('.solve_forms').submit(function() {
     $.ajax({
       type: "POST",
-      url: $('#promblem_solver').attr('action'),
-      data: $("#promblem_solver").serialize(),
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
       success: function(data) {
 	var results_data = JSON.parse(data);
 	placeQueens(results_data['found']);
 	//{:found => @inst_prob.found, :successors => @succs, :goal_tests => @goal_testsm, :states => @states}
-	$('#results').html("<table><tr><td>successors</td><td>goal tests</td><td>states</td><td>found</td></tr><tr><td>"+ results_data['successors'] +"</td><td>"+ results_data['goal_tests'] +"</td><td>"+ results_data['states'] +"</td><td>" + "true" + "</td></tr></table>");
+	$('#results').html("<table class='table table-bordered'><tr><td>successors</td><td>goal tests</td><td>states</td><td>found</td></tr><tr><td>"+ results_data['successors'] +"</td><td>"+ results_data['goal_tests'] +"</td><td>"+ results_data['states'] +"</td><td>" + "true" + "</td></tr></table>");
 	$('#results').show();
       }
     });

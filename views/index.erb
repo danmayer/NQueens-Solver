@@ -1,11 +1,13 @@
   <h3>Random 8*8 N-Queens Board</h3>
 
   <p>
-    <form id="promblem_solver" class="solve_forms" action="/solve" method="post">
-      <input type="hidden" name="search_type" value="solve" />
-      <input type="hidden" name="positions" value="<%=  @prob.initial.to_json %>" />
-      <input type="submit" name="submit" value="solve" class="button" />
-    </form>
+    <% @available_searches.each do |search| %>
+      <form class="solve_forms" action="/solve" method="post">
+        <input type="hidden" name="search_type" value="<%= search %>" />
+        <input type="hidden" name="positions" value="<%=  @prob.initial.to_json %>" />
+        <input type="submit" name="submit" value="solve with <%= search %>" class="button" />
+      </form>
+    <% end %>
   </p>
 
   <div id="results" class="results" style="display:none">
@@ -97,5 +99,5 @@
 
 <br/>
 <hr/>
-Initial CSS / board designed used with permission from <a href="http://designindevelopment.com/css/css3-chess-board/">Design in Development</a>
+Initial CSS / board designed used from <a href="http://designindevelopment.com/css/css3-chess-board/">Design in Development</a>
 <br/><br/> 
