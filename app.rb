@@ -50,7 +50,3 @@ private
 def board_size
   BOARD_SIZE
 end
-
-def debug_env
-  puts `which ruby`
-end
